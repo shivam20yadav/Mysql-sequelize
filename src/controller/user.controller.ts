@@ -1,25 +1,26 @@
 import express, { Express, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import * as user_service from '../services/user.services';
-import {user_data} from '../types/user';
+const userdata = require('../types/user');
 
 export async function getuser(req: Request, res: Response ) {
-    const error = validationResult(req);
-    if(!error.isEmpty()) {
-        return res.status(422).json({ errors: error.array() });
-    }
-    try {
-        await user_service.getuser().then((result) => {
-            res.send(result);
-        }).catch((err) => {
-            res.send(err);
-        });
-    } catch (error) {
-        res.send(error);
-    }
+    await user_service.getuser().then((result) => {
+        res.send(result);
+    }).catch((err) => {
+        res.send(err);
+    });
 }
 export async function adduser(req: Request, res: Response) {
-    const new_user: user_data = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+    const new_user = {
+        username: req.body.username,
+        userpassword: req.body.password,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname
+    }
     await user_service.adduser(new_user).then((result) => {
         res.send("user added");
     }).catch((err) => {

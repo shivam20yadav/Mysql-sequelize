@@ -35,28 +35,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateuser = exports.deleteuser = exports.adduser = exports.getuser = void 0;
 const express_validator_1 = require("express-validator");
 const user_service = __importStar(require("../services/user.services"));
+const userdata = require('../types/user');
 function getuser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const error = (0, express_validator_1.validationResult)(req);
-        if (!error.isEmpty()) {
-            return res.status(422).json({ errors: error.array() });
-        }
-        try {
-            yield user_service.getuser().then((result) => {
-                res.send(result);
-            }).catch((err) => {
-                res.send(err);
-            });
-        }
-        catch (error) {
-            res.send(error);
-        }
+        yield user_service.getuser().then((result) => {
+            res.send(result);
+        }).catch((err) => {
+            res.send(err);
+        });
     });
 }
 exports.getuser = getuser;
 function adduser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const new_user = req.body;
+        const errors = (0, express_validator_1.validationResult)(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        const new_user = {
+            username: req.body.username,
+            userpassword: req.body.password,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname
+        };
         yield user_service.adduser(new_user).then((result) => {
             res.send("user added");
         }).catch((err) => {

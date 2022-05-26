@@ -9,27 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.update_user = exports.delete_user = exports.findusername = exports.adduser = exports.getdata = exports.all_data = void 0;
-const all_data = () => __awaiter(void 0, void 0, void 0, function* () {
-});
-exports.all_data = all_data;
-function getdata() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve, reject) => {
-        });
-    });
-}
-exports.getdata = getdata;
-const adduser = (new_user, callback) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(new_user);
-});
-exports.adduser = adduser;
+exports.findusername = void 0;
 const findusername = (username, callback) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.findusername = findusername;
-const delete_user = (username, callback) => __awaiter(void 0, void 0, void 0, function* () {
-});
-exports.delete_user = delete_user;
-const update_user = (query_str, username, callback) => __awaiter(void 0, void 0, void 0, function* () {
-});
-exports.update_user = update_user;

@@ -1,6 +1,17 @@
-export interface user_data{
-    firstname: string,
-    lastname: string,
-    user_name: string,
-    user_pass: string
-}
+module.exports = (sequelize:any, Sequelize:any) => {
+    const user_data = sequelize.define("userdata", {
+      username: {
+        type: Sequelize.STRING
+      },
+      userpassword: {
+        type: Sequelize.STRING
+      },
+      firstname: {
+        type: Sequelize.STRING
+      },
+      lastname: {
+        type: Sequelize.STRING
+      }
+    });
+    return user_data;
+  };

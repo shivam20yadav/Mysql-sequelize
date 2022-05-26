@@ -1,5 +1,5 @@
 import * as user_model from '../model/user.model';
-import { user_data } from '../types/user';
+
 
 export async function getuser() {
     return new Promise((resolve,reject) => {
@@ -10,8 +10,14 @@ export async function getuser() {
         });
     });
 } 
-export async function adduser(new_user: user_data) {
-    
+export async function adduser(new_user: {}) {
+    return new Promise((resolve,reject) => {
+        user_model.adduser(new_user).then((result) => {
+            resolve(result);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
 }
 export async function delete_user(username: string) {
 
