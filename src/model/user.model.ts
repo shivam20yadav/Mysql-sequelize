@@ -21,22 +21,33 @@ export async function adduser(new_user: {}) {
         }
     });
 }
-/*
-export const adduser = async( new_user : {},callback: (err:Error | null, result?: any) => void) => {
-    try{
-        const data = await user_data.model.create(new_user);
-        console.log(data);
-        
-    }catch(e){
-       console.log(e);
-    }    
-}*/
-export const findusername = async(username: string, callback: Function) => {
-    
-};
-export const delete_user = async(username: string, callback: (err:Error | null, result?: any) => void) => {
-    
-};
-export const update_user = async(query_str:string, username:string,callback: (err:Error | null, result?: any) => void) =>{
-    
+export async function delete_user(username: string) {
+    return new Promise(async (resolve,reject) => {
+        try{
+            const data = await user_data.model.destroy({
+                where: {
+                    username: username
+                }
+            });
+            resolve(data);
+        }catch(e){
+            reject(e);
+        }
+    });
+}
+export async function update_user(user_name:string,updated_user:Request | any)
+{
+    return new Promise(async (resolve,reject) => {
+        console.log(updated_user);
+        try{
+            const data = await user_data.model.update(updated_user,{
+                where: {
+                    username: user_name
+                }
+            });
+            resolve(data);
+        }catch(e){
+            reject(e);
+        }
+    });
 }

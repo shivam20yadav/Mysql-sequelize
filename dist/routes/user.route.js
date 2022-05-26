@@ -38,7 +38,7 @@ user_route.post('/adduser', [
     check('username').isLength({ min: 1 }).withMessage('username is required'),
     check('password').isLength({ min: 1 }).withMessage('password is required'),
     check('firstname').isLength({ min: 1 }).withMessage('firstname is required'),
-    check('lastname').isLength({ min: 1 }).withMessage('lastname is required')
+    check('lastname').isLength({ min: 1 }).withMessage('lastname is required') // lastname is required
 ], user_controller.adduser); // add user
 user_route.delete('/deleteuser/:username', user_controller.deleteuser); // delete user
 user_route.put('/updateuser/:username', user_controller.updateuser); // update user

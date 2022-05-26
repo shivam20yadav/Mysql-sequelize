@@ -61,30 +61,8 @@ exports.adduser = adduser;
 function delete_user(username) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
-            var something;
-            function find_one() {
-                return __awaiter(this, void 0, void 0, function* () {
-                    const mypromisse = new Promise((resolve, reject) => {
-                        user_model.findusername(username, (err, result) => {
-                            if (result == 0) {
-                                resolve(result);
-                            }
-                            if (result == 1) {
-                                reject("User not found");
-                            }
-                        });
-                    });
-                    something = yield mypromisse;
-                });
-            }
-            find_one().then(() => {
-                if (something == 0) {
-                    user_model.delete_user(username, (err, result) => {
-                        if (err)
-                            throw err;
-                        resolve(result);
-                    });
-                }
+            user_model.delete_user(username).then((result) => {
+                resolve(result);
             }).catch((err) => {
                 reject(err);
             });
@@ -95,22 +73,10 @@ exports.delete_user = delete_user;
 function update_user(user_name, updated_user) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
-            user_model.findusername(user_name, (err, result) => {
-                if (result == 1) {
-                    reject("User not found");
-                }
-                if (result == 0) {
-                    let query_build = "";
-                    for (let i in updated_user) {
-                        query_build += `${i} = "${updated_user[i]}" ,`;
-                    }
-                    query_build = query_build.substring(0, query_build.length - 1);
-                    user_model.update_user(query_build, user_name, (err, result) => {
-                        if (err)
-                            throw err;
-                        resolve(result);
-                    });
-                }
+            user_model.update_user(user_name, updated_user).then((result) => {
+                resolve(result);
+            }).catch((err) => {
+                reject(err);
             });
         });
     });

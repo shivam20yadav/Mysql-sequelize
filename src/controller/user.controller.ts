@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import * as user_service from '../services/user.services';
 
