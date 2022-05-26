@@ -1,13 +1,15 @@
-const user_data  = require('../types/user');
+const user_data  = require('./conn');
 
 export async function getdata(){
-    try{
-    const user = await user_data.findAll()
-    console.log(user);
-    }
-    catch(error){
-        console.log(error);
-    }
+    return new Promise(async (resolve,reject) => {
+        try{
+            const data = await user_data.model.findAll();
+            data.map((user: { dataValues: any; }) => user.dataValues);
+            resolve(data);
+        }catch(e){
+            reject(e);
+        }
+    });
 }
 export const adduser = async( new_user : {},callback: (err:Error | null, result?: any) => void) => {
     user_data.create(new_user).then((result: any) => {

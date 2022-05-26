@@ -10,16 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.update_user = exports.delete_user = exports.findusername = exports.adduser = exports.getdata = void 0;
-const user_data = require('../types/user');
+const user_data = require('./conn');
 function getdata() {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const user = yield user_data.findAll();
-            console.log(user);
-        }
-        catch (error) {
-            console.log(error);
-        }
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield user_data.model.findAll();
+                data.map((user) => user.dataValues);
+                resolve(data);
+            }
+            catch (e) {
+                reject(e);
+            }
+        }));
     });
 }
 exports.getdata = getdata;
