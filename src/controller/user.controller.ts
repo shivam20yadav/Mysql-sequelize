@@ -34,7 +34,6 @@ export async function deleteuser(req: Request, res: Response) {
     ).catch((err) => {
         res.send(err);
     });
-
 }
 export async function updateuser(req: Request, res: Response) {
     const username: string = req.params.username;
