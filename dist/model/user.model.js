@@ -26,14 +26,30 @@ function getdata() {
     });
 }
 exports.getdata = getdata;
-const adduser = (new_user, callback) => __awaiter(void 0, void 0, void 0, function* () {
-    user_data.create(new_user).then((result) => {
-        console.log(result);
-    }).catch((err) => {
-        console.log(err);
+function adduser(new_user) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield user_data.model.create(new_user);
+                resolve(data);
+            }
+            catch (e) {
+                reject(e);
+            }
+        }));
     });
-});
+}
 exports.adduser = adduser;
+/*
+export const adduser = async( new_user : {},callback: (err:Error | null, result?: any) => void) => {
+    try{
+        const data = await user_data.model.create(new_user);
+        console.log(data);
+        
+    }catch(e){
+       console.log(e);
+    }
+}*/
 const findusername = (username, callback) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.findusername = findusername;

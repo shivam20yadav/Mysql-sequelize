@@ -1,6 +1,5 @@
 import * as user_model from '../model/user.model';
 
-
 export async function getuser() {
     return new Promise((resolve,reject) => {
         user_model.getdata().then((result) => {
@@ -12,7 +11,7 @@ export async function getuser() {
 } 
 export async function adduser(new_user: {}) {
     return new Promise((resolve,reject) => {
-        user_model.adduser(new_user,(err,result) => {
+        user_model.adduser(new_user).then((result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);

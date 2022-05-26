@@ -1,5 +1,4 @@
 const user_data  = require('./conn');
-
 export async function getdata(){
     return new Promise(async (resolve,reject) => {
         try{
@@ -11,13 +10,27 @@ export async function getdata(){
         }
     });
 }
-export const adduser = async( new_user : {},callback: (err:Error | null, result?: any) => void) => {
-    user_data.create(new_user).then((result: any) => {
-        console.log(result);
-    }).catch((err: any) => {
-        console.log(err);
-    })        
+export async function adduser(new_user: {}) {
+    return new Promise(async (resolve,reject) => {
+        try{
+            const data = await user_data.model.create(new_user);
+            resolve(data);
+        }
+        catch(e){
+            reject(e);
+        }
+    });
 }
+/*
+export const adduser = async( new_user : {},callback: (err:Error | null, result?: any) => void) => {
+    try{
+        const data = await user_data.model.create(new_user);
+        console.log(data);
+        
+    }catch(e){
+       console.log(e);
+    }    
+}*/
 export const findusername = async(username: string, callback: Function) => {
     
 };
