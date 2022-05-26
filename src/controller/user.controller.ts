@@ -1,13 +1,22 @@
 import express, { Express, Request, Response } from 'express';
+import { validationResult } from 'express-validator';
 import * as user_service from '../services/user.services';
 import {user_data} from '../types/user';
 
-export async function getuser(req: Request, res: Response) {
-    await user_service.getuser().then((result) => {
-        res.send(result);
-    }).catch((err) => {
-        res.send(err);
-    });
+export async function getuser(req: Request, res: Response ) {
+    const error = validationResult(req);
+    if(!error.isEmpty()) {
+        return res.status(422).json({ errors: error.array() });
+    }
+    try {
+        await user_service.getuser().then((result) => {
+            res.send(result);
+        }).catch((err) => {
+            res.send(err);
+        });
+    } catch (error) {
+        res.send(error);
+    }
 }
 export async function adduser(req: Request, res: Response) {
     const new_user: user_data = req.body;

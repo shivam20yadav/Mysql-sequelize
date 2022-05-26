@@ -11,42 +11,7 @@ export async function getuser() {
     });
 } 
 export async function adduser(new_user: user_data) {
-    if(new_user.firstname && new_user.lastname && new_user.user_name && new_user.user_pass){
-        if(!new_user.firstname.match(/^[A-Z][a-z]{1,20}$/) && new_user.lastname.match(/^[A-Z][a-z]{1,20}$/))
-        {
-            
-        }
-        var something: unknown;
-        async function find_one() {
-            const mypromisse = new Promise((resolve,reject) => {
-                user_model.findusername(new_user.user_name,(err: any,result: unknown) => {
-                    if(result == 1) 
-                    {
-                        resolve(result);
-                    }
-                    if(result == 0)
-                    {
-                        reject("User already exists");
-                    }
-                });
-            }); 
-            something = await mypromisse;
-        }
-        find_one().then(() => {
-            if(something == 1){
-                user_model.adduser(new_user,(err,result) => {
-                    if(err) throw err;
-                    return result;
-                });
-            }
-        }).catch((err) => {
-            console.log(err);
-        });  
-    }else{
-        return new Promise((resolve,reject) => {
-            reject('Please fill all fields');
-        });
-    }
+    
 }
 export async function delete_user(username: string) {
 
