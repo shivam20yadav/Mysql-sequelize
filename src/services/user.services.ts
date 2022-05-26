@@ -12,7 +12,7 @@ export async function getuser() {
 } 
 export async function adduser(new_user: {}) {
     return new Promise((resolve,reject) => {
-        user_model.adduser(new_user).then((result) => {
+        user_model.adduser(new_user,(err,result) => {
             resolve(result);
         }).catch((err) => {
             reject(err);

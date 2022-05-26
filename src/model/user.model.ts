@@ -1,16 +1,18 @@
-import {OkPacket,RowDataPacket} from "mysql2";
-
+const userdata  = require('../types/user');
 
 export const all_data = async() =>{
     
 }
 export async function getdata(){
-    return new Promise((resolve,reject) => {
-        
-    });
+    
 }
 export const adduser = async( new_user : {},callback: (err:Error | null, result?: any) => void) => {
-    console.log(new_user);
+    userdata.create(new_user).then((result: any) => {
+        console.log(result);
+    }).catch((err: any) => {
+        console.log(err);
+    })        
+
 }
 export const findusername = async(username: string, callback: Function) => {
     

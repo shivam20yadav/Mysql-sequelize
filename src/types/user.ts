@@ -14,4 +14,4 @@ module.exports = (sequelize:any, Sequelize:any) => {
       }
     });
     return user_data;
-  };
+};

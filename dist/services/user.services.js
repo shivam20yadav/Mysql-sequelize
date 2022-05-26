@@ -49,7 +49,7 @@ exports.getuser = getuser;
 function adduser(new_user) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
-            user_model.adduser(new_user).then((result) => {
+            user_model.adduser(new_user, (err, result) => {
                 resolve(result);
             }).catch((err) => {
                 reject(err);

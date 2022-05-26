@@ -23,11 +23,3 @@ db.sequelize = sequelize;
 db.model = require('../types/user')(sequelize, Sequelize);
 
 module.exports  = db;
-
-
-console.log("-------------------------------------");
-console.log(process.env.DB_HOST);
-console.log(process.env.DB_USER);
-console.log(process.env.DB_PWD);
-console.log(process.env.DB_NAME);
-console.log("-------------------------------------");
