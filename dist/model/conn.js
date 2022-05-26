@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const Sequelize = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config({ path: './src/config/.env' });

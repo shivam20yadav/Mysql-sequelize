@@ -1,7 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import * as user_service from '../services/user.services';
-const userdata = require('../types/user');
 
 export async function getuser(req: Request, res: Response ) {
     await user_service.getuser().then((result) => {

@@ -9,18 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.update_user = exports.delete_user = exports.findusername = exports.adduser = exports.getdata = exports.all_data = void 0;
-const userdata = require('../types/user');
-const all_data = () => __awaiter(void 0, void 0, void 0, function* () {
-});
-exports.all_data = all_data;
+exports.update_user = exports.delete_user = exports.findusername = exports.adduser = exports.getdata = void 0;
+const user_data = require('../types/user');
 function getdata() {
     return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const user = yield user_data.findAll();
+            console.log(user);
+        }
+        catch (error) {
+            console.log(error);
+        }
     });
 }
 exports.getdata = getdata;
 const adduser = (new_user, callback) => __awaiter(void 0, void 0, void 0, function* () {
-    userdata.create(new_user).then((result) => {
+    user_data.create(new_user).then((result) => {
         console.log(result);
     }).catch((err) => {
         console.log(err);

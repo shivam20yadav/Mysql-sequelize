@@ -35,7 +35,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateuser = exports.deleteuser = exports.adduser = exports.getuser = void 0;
 const express_validator_1 = require("express-validator");
 const user_service = __importStar(require("../services/user.services"));
-const userdata = require('../types/user');
 function getuser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         yield user_service.getuser().then((result) => {
