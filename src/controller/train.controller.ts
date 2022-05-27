@@ -10,6 +10,10 @@ export async function gettrain (req: Request, res: Response) {
   })
 }
 export async function addtrain (req: Request, res: Response) {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() })
+  }
   await train_service.addtrain(req.body).then((result: any) => {
     res.send('train added')
   }).catch((err: any) => {
@@ -18,6 +22,10 @@ export async function addtrain (req: Request, res: Response) {
   )
 }
 export async function deletetrain (req: Request, res: Response) {
+  const error = validationResult(req)
+  if (!error.isEmpty()) {
+    return res.status(422).json({ errors: error.array() })
+  }
   await train_service.deletetrain(req.params.train_name).then((result: any) => {
     res.send('train deleted')
   }).catch((err: any) => {
@@ -25,6 +33,10 @@ export async function deletetrain (req: Request, res: Response) {
   })
 }
 export async function updatetrain (req: Request, res: Response) {
+  const error = validationResult(req)
+  if (!error.isEmpty()) {
+    return res.status(422).json({ errors: error.array() })
+  }
   await train_service.updatetrain(req.params.train_name, req.body).then((result: any) => {
     res.send('train updated')
   }).catch((err: any) => {

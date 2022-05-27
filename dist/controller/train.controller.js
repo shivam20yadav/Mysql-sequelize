@@ -33,6 +33,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updatetrain = exports.deletetrain = exports.addtrain = exports.gettrain = void 0;
+const express_validator_1 = require("express-validator");
 const train_service = __importStar(require("../services/train.services"));
 function gettrain(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -46,6 +47,10 @@ function gettrain(req, res) {
 exports.gettrain = gettrain;
 function addtrain(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        const errors = (0, express_validator_1.validationResult)(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         yield train_service.addtrain(req.body).then((result) => {
             res.send('train added');
         }).catch((err) => {
@@ -56,6 +61,10 @@ function addtrain(req, res) {
 exports.addtrain = addtrain;
 function deletetrain(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        const error = (0, express_validator_1.validationResult)(req);
+        if (!error.isEmpty()) {
+            return res.status(422).json({ errors: error.array() });
+        }
         yield train_service.deletetrain(req.params.train_name).then((result) => {
             res.send('train deleted');
         }).catch((err) => {
@@ -66,6 +75,10 @@ function deletetrain(req, res) {
 exports.deletetrain = deletetrain;
 function updatetrain(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        const error = (0, express_validator_1.validationResult)(req);
+        if (!error.isEmpty()) {
+            return res.status(422).json({ errors: error.array() });
+        }
         yield train_service.updatetrain(req.params.train_name, req.body).then((result) => {
             res.send('train updated');
         }).catch((err) => {
