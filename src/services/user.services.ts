@@ -1,5 +1,4 @@
 import * as user_model from '../model/user.model'
-
 export async function getuser () {
   return new Promise((resolve, reject) => {
     user_model.getdata().then((result) => {
@@ -32,7 +31,6 @@ export async function update_user (user_name:string, updated_user:Request | any)
     let query_build:any = {}; 
     for(let i in updated_user)
         query_build[i] = updated_user[i];
-    console.log(query_build);
     user_model.update_user(user_name, query_build).then((result) => {
       resolve(result)
     }).catch((err) => {

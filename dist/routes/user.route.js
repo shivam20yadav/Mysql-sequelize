@@ -67,7 +67,16 @@ user_route.post('/adduser', [
         });
     })
 ], user_controller.adduser); // add user
-user_route.delete('/deleteuser/:username', user_controller.deleteuser); // delete user
+user_route.delete('/deleteuser/:username', [
+    check('username').custom((value, { req }) => {
+        return user_common.findusername(value).then((result) => {
+            if (result.length === 0) {
+                throw new Error('username not found');
+            }
+            return true;
+        });
+    })
+], user_controller.deleteuser); // delete user
 user_route.put('/updateuser/:username', check('username').custom((value, { req }) => {
     return user_common.findusername(value).then((result) => {
         if (result.length <= 0) {

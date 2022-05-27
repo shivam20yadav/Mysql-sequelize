@@ -67,7 +67,7 @@ function update_user(user_name, updated_user) {
                         username: user_name
                     }
                 });
-                console.log(data + "data");
+                resolve(data);
             }
             catch (e) {
                 reject(e);

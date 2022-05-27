@@ -76,7 +76,6 @@ function update_user(user_name, updated_user) {
             let query_build = {};
             for (let i in updated_user)
                 query_build[i] = updated_user[i];
-            console.log(query_build);
             user_model.update_user(user_name, query_build).then((result) => {
                 resolve(result);
             }).catch((err) => {
