@@ -31,6 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express")); // express is the framework
 const user_controller = __importStar(require("../controller/user.controller")); // user controller is defined in user.controller.ts
+const user_common = __importStar(require("../common/common.function")); // common functions are defined in common.function.ts
 const { check, validationResult } = require('express-validator');
 const user_route = express_1.default.Router(); // create express router
 user_route.get('/getuser', user_controller.getuser); // get user
@@ -38,8 +39,43 @@ user_route.post('/adduser', [
     check('username').isLength({ min: 1 }).withMessage('username is required'),
     check('password').isLength({ min: 1 }).withMessage('password is required'),
     check('firstname').isLength({ min: 1 }).withMessage('firstname is required'),
-    check('lastname').isLength({ min: 1 }).withMessage('lastname is required') // lastname is required
+    check('lastname').isLength({ min: 1 }).withMessage('lastname is required'),
+    check('email').isEmail().withMessage('email is required'),
+    check('phonenumber').isNumeric().withMessage('phonenumber is required'),
+    check('username').custom((value, { req }) => {
+        return user_common.findusername(value).then((result) => {
+            if (result.length > 0) {
+                throw new Error('username already exists');
+            }
+            return true;
+        });
+    }),
+    check('email').custom((value, { req }) => {
+        return user_common.checkemail(value).then((result) => {
+            if (result.length > 0) {
+                throw new Error('email already exists');
+            }
+            return true;
+        });
+    }),
+    check('phonenumber').custom((value, { req }) => {
+        return user_common.checkphone(value).then((result) => {
+            if (result.length > 0) {
+                throw new Error('phonenumber already exists');
+            }
+            return true;
+        });
+    })
 ], user_controller.adduser); // add user
 user_route.delete('/deleteuser/:username', user_controller.deleteuser); // delete user
-user_route.put('/updateuser/:username', user_controller.updateuser); // update user
+user_route.put('/updateuser/:username', [
+    check('username').custom((value, { req }) => {
+        return user_common.findusername(value).then((result) => {
+            if (result.length <= 0) {
+                throw new Error('username does not exists');
+            }
+            return true;
+        });
+    }),
+], user_controller.updateuser); // update user
 module.exports = user_route;

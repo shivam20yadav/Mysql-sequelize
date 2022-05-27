@@ -82,6 +82,10 @@ function deleteuser(req, res) {
 exports.deleteuser = deleteuser;
 function updateuser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        const err = (0, express_validator_1.validationResult)(req);
+        if (!err.isEmpty()) {
+            return res.status(422).json({ errors: err.array() });
+        }
         const username = req.params.username;
         yield user_service.update_user(username, req.body).then((result) => {
             res.send('user updated');

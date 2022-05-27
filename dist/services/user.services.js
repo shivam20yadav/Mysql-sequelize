@@ -73,7 +73,12 @@ exports.delete_user = delete_user;
 function update_user(user_name, updated_user) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
-            user_model.update_user(user_name, updated_user).then((result) => {
+            let query_build = "";
+            for (let i in updated_user) {
+                query_build += `${i} = "${updated_user[i]}" ,`;
+            }
+            console.log(query_build);
+            user_model.update_user(user_name, query_build).then((result) => {
                 resolve(result);
             }).catch((err) => {
                 reject(err);

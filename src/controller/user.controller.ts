@@ -40,6 +40,10 @@ export async function deleteuser (req: Request, res: Response) {
   })
 }
 export async function updateuser (req: Request, res: Response) {
+  const err = validationResult(req)
+  if (!err.isEmpty()) {
+    return res.status(422).json({ errors: err.array() })
+  }
   const username: string = req.params.username
   await user_service.update_user(username, req.body).then((result) => {
     res.send('user updated')

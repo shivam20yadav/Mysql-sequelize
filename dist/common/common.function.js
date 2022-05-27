@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findusername = void 0;
-const user_data = require('./conn');
+exports.checkphone = exports.checkemail = exports.findusername = void 0;
+const data_model = require('../model/conn');
 function findusername(username) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield user_data.model.findOne({
+                const data = yield data_model.model.findAll({
                     where: {
                         username
                     }
@@ -29,3 +29,39 @@ function findusername(username) {
     });
 }
 exports.findusername = findusername;
+function checkemail(email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield data_model.model.findAll({
+                    where: {
+                        email
+                    }
+                });
+                resolve(data);
+            }
+            catch (e) {
+                reject(e);
+            }
+        }));
+    });
+}
+exports.checkemail = checkemail;
+function checkphone(phonenumber) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield data_model.model.findAll({
+                    where: {
+                        phonenumber
+                    }
+                });
+                resolve(data);
+            }
+            catch (e) {
+                reject(e);
+            }
+        }));
+    });
+}
+exports.checkphone = checkphone;
