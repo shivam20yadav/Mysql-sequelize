@@ -1,26 +1,26 @@
-"use strict";
+"use strict"
 /**
  * in this file we will define the  train station model
  * which will be used to create the train station table
  */
-const train = require('../utils/train');
+const train = require('../utils/train')
 module.exports = (sequelize, Sequelize) => {
-    const train_station = sequelize.define('train_station', {
-        train_id: {
-            type: Sequelize.INTEGER,
-        },
-        station_id: {
-            type: Sequelize.INTEGER
-        },
-        station_name: {
-            type: Sequelize.STRING
-        },
-        station_arrival_time: {
-            type: Sequelize.STRING
-        },
-        station_departure_time: {
-            type: Sequelize.STRING
-        }
-    });
-    return train_station;
-};
+  const train_station = sequelize.define('train_station', {
+    train_id: {
+      type: Sequelize.INTEGER
+    },
+    station_id: {
+      type: Sequelize.INTEGER
+    },
+    station_name: {
+      type: Sequelize.STRING
+    },
+    station_arrival_time: {
+      type: Sequelize.STRING
+    },
+    station_departure_time: {
+      type: Sequelize.STRING
+    }
+  })
+  return train_station
+}

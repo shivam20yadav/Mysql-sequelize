@@ -11,9 +11,9 @@ export async function findusername (username:string) {
           username
         }
       })
-      resolve(data);
+      resolve(data)
     } catch (e) {
-      reject(e);
+      reject(e)
     }
   })
 }

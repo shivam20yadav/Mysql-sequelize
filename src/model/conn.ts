@@ -11,10 +11,10 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     idle: 10000
   }
 })
-const db:any = {};
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-db.model = require('../utils/user')(sequelize, Sequelize);
-db.train_model = require('../utils/train')(sequelize, Sequelize);
-db.train_station_model = require('../utils/train_station')(sequelize, Sequelize);
-module.exports = db;
+const db:any = {}
+db.Sequelize = Sequelize
+db.sequelize = sequelize
+db.model = require('../utils/user')(sequelize, Sequelize)
+db.train_model = require('../utils/train')(sequelize, Sequelize)
+db.train_station_model = require('../utils/train_station')(sequelize, Sequelize)
+module.exports = db

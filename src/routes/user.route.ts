@@ -5,7 +5,7 @@
 import express from 'express' // express is the framework
 import * as user_controller from '../controller/user.controller' // user controller is defined in user.controller.ts
 import * as user_common from '../common/common.function' // common functions are defined in common.function.ts
-const { check, validationResult } = require('express-validator')
+const { check } = require('express-validator')
 const user_route = express.Router() // create express router
 
 user_route.get('/getuser', user_controller.getuser) // get user
