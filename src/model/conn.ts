@@ -17,7 +17,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const db:any = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.model = require('../types/user')(sequelize,Sequelize);
+db.model = require('../utils/user')(sequelize,Sequelize);
 module.exports  = db;
 
 

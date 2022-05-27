@@ -11,6 +11,19 @@ module.exports = (sequelize:any, Sequelize:any) => {
       },
       lastname: {
         type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING,
+        validate: {
+          isEmail: true
+        }
+      },
+      phonenumber: {
+        type: Sequelize.STRING,
+        allownull: true,
+        validate: {
+          isNumeric: true
+        }
       }
     });
     return user_data;
