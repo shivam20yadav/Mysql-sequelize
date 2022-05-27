@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const Sequelize = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config({ path: './src/config/.env' });
@@ -16,5 +15,5 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.model = require('../types/user')(sequelize, Sequelize);
+db.model = require('../utils/user')(sequelize, Sequelize);
 module.exports = db;

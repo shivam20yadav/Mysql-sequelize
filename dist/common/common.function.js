@@ -10,6 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findusername = void 0;
-const findusername = (username, callback) => __awaiter(void 0, void 0, void 0, function* () {
-});
+const user_data = require('./conn');
+function findusername(username) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield user_data.model.findOne({
+                    where: {
+                        username
+                    }
+                });
+                resolve(data);
+            }
+            catch (e) {
+                reject(e);
+            }
+        }));
+    });
+}
 exports.findusername = findusername;

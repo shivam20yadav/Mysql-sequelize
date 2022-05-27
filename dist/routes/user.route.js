@@ -32,7 +32,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express")); // express is the framework
 const user_controller = __importStar(require("../controller/user.controller")); // user controller is defined in user.controller.ts
 const { check, validationResult } = require('express-validator');
-const user_route = express_1.default.Router(); // create express router 
+const user_route = express_1.default.Router(); // create express router
 user_route.get('/getuser', user_controller.getuser); // get user
 user_route.post('/adduser', [
     check('username').isLength({ min: 1 }).withMessage('username is required'),

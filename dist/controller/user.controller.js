@@ -40,7 +40,7 @@ function getuser(req, res) {
         yield user_service.getuser().then((result) => {
             res.send(result);
         }).catch((err) => {
-            res.send(err);
+            res.status(500).send(err);
         });
     });
 }
@@ -51,14 +51,18 @@ function adduser(req, res) {
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
+        console.log(req.body.phonenumber);
         const new_user = {
             username: req.body.username,
             userpassword: req.body.password,
             firstname: req.body.firstname,
-            lastname: req.body.lastname
+            lastname: req.body.lastname,
+            email: req.body.email,
+            phonenumber: req.body.phonenumber
         };
+        console.log(new_user);
         yield user_service.adduser(new_user).then((result) => {
-            res.send("user added");
+            res.send('user added');
         }).catch((err) => {
             res.send(err);
         });
@@ -69,7 +73,7 @@ function deleteuser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const username = req.params.username;
         yield user_service.delete_user(username).then((result) => {
-            res.send("user deleted");
+            res.send('user deleted');
         }).catch((err) => {
             res.send(err);
         });
@@ -80,7 +84,7 @@ function updateuser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const username = req.params.username;
         yield user_service.update_user(username, req.body).then((result) => {
-            res.send("user updated");
+            res.send('user updated');
         }).catch((err) => {
             res.send(err);
         });

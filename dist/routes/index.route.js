@@ -11,4 +11,4 @@ const express_1 = __importDefault(require("express")); // express is the framewo
 const user_route = require('./user.route'); // routes for a user are defined in user.route.ts
 const route = express_1.default.Router(); // create express router
 route.use('/user', user_route); // use user routes
-module.exports = route; // export router for use in app.ts  
+module.exports = route; // export router for use in app.ts

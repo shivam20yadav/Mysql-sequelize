@@ -46,7 +46,7 @@ function delete_user(username) {
             try {
                 const data = yield user_data.model.destroy({
                     where: {
-                        username: username
+                        username
                     }
                 });
                 resolve(data);
