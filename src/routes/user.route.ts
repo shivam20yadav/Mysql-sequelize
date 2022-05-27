@@ -11,10 +11,10 @@ const user_route = express.Router() // create express router
 user_route.get('/getuser', user_controller.getuser) // get user
 
 user_route.post('/adduser', [
-  check('username').isLength({ min: 1 }).withMessage('username is required'), // username is required
-  check('password').isLength({ min: 1 }).withMessage('password is required'), // password is required
-  check('firstname').isLength({ min: 1 }).withMessage('firstname is required'), // firstname is required
-  check('lastname').isLength({ min: 1 }).withMessage('lastname is required'), // lastname is required
+  check('username').isLength({ min: 2 }).withMessage('username is required'), // username is required
+  check('password').isLength({ min: 7 }).withMessage('password is required'), // password is required
+  check('firstname').isLength({ min: 2 }).withMessage('firstname is required'), // firstname is required
+  check('lastname').isLength({ min: 2 }).withMessage('lastname is required'), // lastname is required
   check('email').isEmail().withMessage('email is required'), // email is required
   check('phonenumber').isNumeric().withMessage('phonenumber is required'), // phonenumber is required
   check('username').custom((value: string, { req }: any) => {
@@ -26,7 +26,7 @@ user_route.post('/adduser', [
     })
   }),
   check('email').custom((value: string, { req }: any) => {
-    return user_common.checkemail(value).then((result:any) => {
+    return user_common.checkemail(value).then((result:any) => { // check email is already exists
       if (result.length > 0) {
         throw new Error('email already exists')
       }
@@ -34,7 +34,7 @@ user_route.post('/adduser', [
     })
   }),
   check('phonenumber').custom((value: string, { req }: any) => {
-    return user_common.checkphone(value).then((result:any) => {
+    return user_common.checkphone(value).then((result:any) => { // check phone number
       if (result.length > 0) {
         throw new Error('phonenumber already exists')
       }
@@ -45,7 +45,7 @@ user_route.post('/adduser', [
 
 user_route.delete('/deleteuser/:username', [
   check('username').custom((value: string, { req }: any) => {
-    return user_common.findusername(value).then((result:any) => {
+    return user_common.findusername(value).then((result:any) => { // find username in database and check if it exists
       if (result.length === 0) {
         throw new Error('username not found')
       }
@@ -55,7 +55,7 @@ user_route.delete('/deleteuser/:username', [
 ], user_controller.deleteuser) // delete user
 user_route.put('/updateuser/:username',
   check('username').custom((value: string, { req }: any) => {
-    return user_common.findusername(value).then((result:any) => {
+    return user_common.findusername(value).then((result:any) => { // find username if exists send error
       if (result.length <= 0) {
         throw new Error('username does not exists')
       }

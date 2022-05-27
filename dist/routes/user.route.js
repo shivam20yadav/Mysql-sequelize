@@ -36,10 +36,10 @@ const { check } = require('express-validator');
 const user_route = express_1.default.Router(); // create express router
 user_route.get('/getuser', user_controller.getuser); // get user
 user_route.post('/adduser', [
-    check('username').isLength({ min: 1 }).withMessage('username is required'),
-    check('password').isLength({ min: 1 }).withMessage('password is required'),
-    check('firstname').isLength({ min: 1 }).withMessage('firstname is required'),
-    check('lastname').isLength({ min: 1 }).withMessage('lastname is required'),
+    check('username').isLength({ min: 2 }).withMessage('username is required'),
+    check('password').isLength({ min: 7 }).withMessage('password is required'),
+    check('firstname').isLength({ min: 2 }).withMessage('firstname is required'),
+    check('lastname').isLength({ min: 2 }).withMessage('lastname is required'),
     check('email').isEmail().withMessage('email is required'),
     check('phonenumber').isNumeric().withMessage('phonenumber is required'),
     check('username').custom((value, { req }) => {
