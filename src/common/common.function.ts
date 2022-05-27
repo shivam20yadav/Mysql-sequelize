@@ -1,3 +1,7 @@
+/**
+ * this file having a common function for user model
+ */
+
 const data_model = require('../model/conn')
 export async function findusername (username:string) {
   return new Promise(async (resolve, reject) => {

@@ -1,5 +1,8 @@
+/**
+ * In this file we perform user add update delete and get opration
+ */
 const user_data = require('./conn')
-export async function getdata () {
+export async function getdata () {   // get all user data
   return new Promise(async (resolve, reject) => {
     try {
       const data = await user_data.model.findAll()
@@ -10,7 +13,7 @@ export async function getdata () {
     }
   })
 }
-export async function adduser (new_user: {}) {
+export async function adduser (new_user: {}) {  // add new user
   return new Promise(async (resolve, reject) => {
     try {
       const data = await user_data.model.create(new_user)
@@ -20,7 +23,7 @@ export async function adduser (new_user: {}) {
     }
   })
 }
-export async function delete_user (username: string) {
+export async function delete_user (username: string) { // delete user by username
   return new Promise(async (resolve, reject) => {
     try {
       const data = await user_data.model.destroy({
@@ -34,7 +37,7 @@ export async function delete_user (username: string) {
     }
   })
 }
-export async function update_user (user_name:string, updated_user:Request | any) {
+export async function update_user (user_name:string, updated_user:Request | any) { // update user by username 
   return new Promise(async (resolve, reject) => {
     try {
       const data = await user_data.model.update(updated_user, {
