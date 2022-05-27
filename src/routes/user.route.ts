@@ -44,14 +44,16 @@ user_route.post('/adduser', [
 ], user_controller.adduser)// add user
 
 user_route.delete('/deleteuser/:username', user_controller.deleteuser) // delete user
-user_route.put('/updateuser/:username',[
+user_route.put('/updateuser/:username',
    check('username').custom((value: string, { req }: any) => {
       return user_common.findusername(value).then((result:any) => {
          if (result.length <= 0) {
-               throw new Error('username does not exists')
+               throw new Error('username does not exists');
          }
-         return true
+         if(result.length > 0) {
+            return true;
+         }
       })
    }),
-] ,user_controller.updateuser) // update user
-module.exports = user_route
+   user_controller.updateuser) // update user
+module.exports = user_route;

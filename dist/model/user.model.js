@@ -61,18 +61,17 @@ exports.delete_user = delete_user;
 function update_user(user_name, updated_user) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            /*
             try {
-              const data = await user_data.model.update(updated_user, {
-                value: updated_user,
-                where: {
-                  username: user_name
-                }
-              })
-              resolve(data)
-            } catch (e) {
-              reject(e)
-            }*/
+                const data = yield user_data.model.update(updated_user, {
+                    where: {
+                        username: user_name
+                    }
+                });
+                console.log(data + "data");
+            }
+            catch (e) {
+                reject(e);
+            }
         }));
     });
 }
