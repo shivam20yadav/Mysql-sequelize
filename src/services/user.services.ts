@@ -28,9 +28,8 @@ export async function delete_user (username: string) {
 }
 export async function update_user (user_name:string, updated_user:Request | any) {
   return new Promise((resolve, reject) => {
-    let query_build:any = {}; 
-    for(let i in updated_user)
-        query_build[i] = updated_user[i];
+    const query_build:any = {} 
+    for (const i in updated_user) { query_build[i] = updated_user[i] }
     user_model.update_user(user_name, query_build).then((result) => {
       resolve(result)
     }).catch((err) => {

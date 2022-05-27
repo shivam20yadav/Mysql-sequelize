@@ -36,15 +36,15 @@ export async function delete_user (username: string) {
 }
 export async function update_user (user_name:string, updated_user:Request | any) {
   return new Promise(async (resolve, reject) => {
-    try{
-        const data = await user_data.model.update(updated_user, {
-            where: {
-                username: user_name
-            }
-        })
-        resolve(data);
-    }catch(e){
-        reject(e);
+    try {
+      const data = await user_data.model.update(updated_user, {
+        where: {
+          username: user_name
+        }
+      })
+      resolve(data)
+    } catch (e) {
+      reject(e)
     }
-    });
+  })
 }

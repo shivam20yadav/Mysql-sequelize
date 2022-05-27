@@ -15,7 +15,7 @@ const sequelize = require('./model/conn'); // sequelize is the connection to the
 dotenv_1.default.config({ path: 'src/config/.env' }); // load environment variables from .env file
 const app = (0, express_1.default)(); // create express app
 sequelize.sequelize.sync(); // sync the database
-//sequelize.sequelize.sync({force: true}); // force the database to sync
+// sequelize.sequelize.sync({force: true}); // force the database to sync
 app.use(body_parser_1.default.json()); // parse json
 app.use(body_parser_1.default.urlencoded({ extended: true })); // parse urlencoded
 app.use('/', route); // use routes

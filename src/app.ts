@@ -12,7 +12,7 @@ dotenv.config({ path: 'src/config/.env' }) // load environment variables from .e
 
 const app: Express = express() // create express app
 sequelize.sequelize.sync() // sync the database
-//sequelize.sequelize.sync({force: true}); // force the database to sync
+// sequelize.sequelize.sync({force: true}); // force the database to sync
 app.use(bodyParser.json()) // parse json
 app.use(bodyParser.urlencoded({ extended: true })) // parse urlencoded
 app.use('/', route) // use routes

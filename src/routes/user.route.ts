@@ -18,51 +18,51 @@ user_route.post('/adduser', [
   check('email').isEmail().withMessage('email is required'), // email is required
   check('phonenumber').isNumeric().withMessage('phonenumber is required'), // phonenumber is required
   check('username').custom((value: string, { req }: any) => {
-      return user_common.findusername(value).then((result:any) => {
-         if (result.length > 0) {
-             throw new Error('username already exists')
-         }
-         return true
-      })
-   }),
-   check('email').custom((value: string, { req }: any) => {
-      return user_common.checkemail(value).then((result:any) => {
-         if (result.length > 0) {
-               throw new Error('email already exists')
-         }
-         return true
-      })
-   }),
-   check('phonenumber').custom((value: string, { req }: any) => {
-      return user_common.checkphone(value).then((result:any) => {
-         if (result.length > 0) {
-               throw new Error('phonenumber already exists')
-         }
-         return true
-      })
-   })
+    return user_common.findusername(value).then((result:any) => {
+      if (result.length > 0) {
+        throw new Error('username already exists')
+      }
+      return true
+    })
+  }),
+  check('email').custom((value: string, { req }: any) => {
+    return user_common.checkemail(value).then((result:any) => {
+      if (result.length > 0) {
+        throw new Error('email already exists')
+      }
+      return true
+    })
+  }),
+  check('phonenumber').custom((value: string, { req }: any) => {
+    return user_common.checkphone(value).then((result:any) => {
+      if (result.length > 0) {
+        throw new Error('phonenumber already exists')
+      }
+      return true
+    })
+  })
 ], user_controller.adduser)// add user
 
-user_route.delete('/deleteuser/:username',[
-   check('username').custom((value: string, { req }: any) => {
-      return user_common.findusername(value).then((result:any) => {
-         if (result.length === 0) {
-               throw new Error('username not found')
-         }
-         return true
-      })
-   })
-] ,user_controller.deleteuser) // delete user
+user_route.delete('/deleteuser/:username', [
+  check('username').custom((value: string, { req }: any) => {
+    return user_common.findusername(value).then((result:any) => {
+      if (result.length === 0) {
+        throw new Error('username not found')
+      }
+      return true
+    })
+  })
+], user_controller.deleteuser) // delete user
 user_route.put('/updateuser/:username',
-   check('username').custom((value: string, { req }: any) => {
-      return user_common.findusername(value).then((result:any) => {
-         if (result.length <= 0) {
-               throw new Error('username does not exists');
-         }
-         if(result.length > 0) {
-            return true;
-         }
-      })
-   }),
-   user_controller.updateuser) // update user
-module.exports = user_route;
+  check('username').custom((value: string, { req }: any) => {
+    return user_common.findusername(value).then((result:any) => {
+      if (result.length <= 0) {
+        throw new Error('username does not exists')
+      }
+      if (result.length > 0) {
+        return true
+      }
+    })
+  }),
+  user_controller.updateuser) // update user
+module.exports = user_route
