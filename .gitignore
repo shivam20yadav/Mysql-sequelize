@@ -4,3 +4,6 @@ node_modules
 # .env files 
 src/config/.env
 dist
+private.pem
+public.pem
+package-lock.json
