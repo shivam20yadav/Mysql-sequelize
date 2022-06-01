@@ -1,13 +1,72 @@
-<h1 align="center">Hi 👋, I'm Shivam yadav</h1>
-- 🔭 I’m currently working on [Mysql-sequelize](https://github.com/shivam20yadav/Mysql-sequelize)
+# MYSqL with sequelize and express validation 
 
-- 🌱 I’m currently learning **Nodejs, typescript, express**
+## Project Description
 
-- 📫 How to reach me **shivam20yadav@gmail.com**
+In this project I am trying to make Crud opration using sequelize and also, using express validation to put validation with some custom validation.
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-</p>
-
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> </p>
+## Installation
+If you are using git bash just copy above command into your bash project will be clone in your directory.
+```bash
+git clone https://github.com/shivam20yadav/Mysql-sequelize.git
+```
+## Usage
+ After the download or clone just open command prompt or if using vscode goto the vs code terminal and copy and past below command it will be run code
+  ```bash
+  npm run start
+  ```
+  now click in this [link](http://127.0.0.1:300)
+  
+ 
+## routes
+  ### user routes
+  This route help to get all user data
+```bash
+  http://127.0.0.1:3000/user/getuser
+  ```
+   This route help to add user into the database
+```bash
+  http://127.0.0.1:3000/user/adduser
+  ```
+  This route help to update user (after slash put username)
+```bash
+  http://127.0.0.1:3000/user/updateuser/
+  ```
+  This route help to delete user from the database (after slash put username)
+```bash
+  http://127.0.0.1:3000/user/deleteuser/
+  ```
+  
+  ### train routes
+  This train route help to get all train data
+```bash
+  http://127.0.0.1:3000/train/gettrain
+  ```
+   This route help to add train into the database
+```bash
+  http://127.0.0.1:3000/train/addtrain
+  ```
+  This route help to update train (after slash put train number)
+```bash
+  http://127.0.0.1:3000/train/updatetrain/
+  ```
+  This route help to delete train from the database (after slash put train number)
+```bash
+  http://127.0.0.1:3000/train/deletetrain/
+  ```
+  ### station routes
+  This train route help to get all station data
+```bash
+  http://127.0.0.1:3000/station/getstation
+  ```
+   This route help to add station into the database
+```bash
+  http://127.0.0.1:3000/station/addstation
+  ```
+  This route help to update station (after slash put station name)
+```bash
+  http://127.0.0.1:3000/station/updatestation/
+  ```
+  This route help to delete station from the database (after slash put station name)
+```bash
+  http://127.0.0.1:3000/station/deletestation/
+  
