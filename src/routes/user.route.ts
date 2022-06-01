@@ -9,7 +9,7 @@ import * as user_validation from '../rules/user.rules' // user rules is defined 
 const user_route = express.Router() // create express router
 
 user_route.get('/getuser', user_controller.getuser) // get user
-user_route.post('/adduser', user_validation.user_validation_add_user,user_controller.adduser)// add user
-user_route.delete('/deleteuser/:username', user_validation.user_validation_update_delete_user,user_controller.deleteuser) // delete user
-user_route.put('/updateuser/:username',user_validation.user_validation_update_delete_user,user_controller.updateuser) // update user
+user_route.post('/adduser', user_validation.user_validation_add_user, user_controller.adduser)// add user
+user_route.delete('/deleteuser/:username', user_validation.user_validation_update_delete_user, user_controller.deleteuser) // delete user
+user_route.put('/updateuser/:username', user_validation.user_validation_update_delete_user, user_controller.updateuser) // update user
 module.exports = user_route

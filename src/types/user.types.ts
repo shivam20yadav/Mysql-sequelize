@@ -6,6 +6,3 @@ export interface user_data{
     email: string;
     phonenumber: string;
 }
-
-
-  

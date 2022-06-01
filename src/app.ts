@@ -5,9 +5,9 @@
 
 import express, { Express, Request, Response } from 'express' // express is the framework
 import bodyParser from 'body-parser' // body-parser is a middleware for express
-import dotenv from 'dotenv' // dotenv is a module for loading environment variables from a .env file into process.env
-const route = require('./routes/index.route') // routes are defined in index.route.ts
-import { generateToken } from './utils/jwt.utils' // jwt utils is used for generating tokens';
+import dotenv from 'dotenv' // routes are defined in index.route.ts
+import { generateToken } from './utils/jwt.utils' // dotenv is a module for loading environment variables from a .env file into process.env
+const route = require('./routes/index.route') // jwt utils is used for generating tokens';
 
 const sequelize = require('./model/conn') // sequelize is the connection to the database
 dotenv.config({ path: 'src/config/.env' }) // load environment variables from .env file

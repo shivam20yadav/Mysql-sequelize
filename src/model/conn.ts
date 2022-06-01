@@ -20,7 +20,7 @@ const db:any = {} // create the object
 db.Sequelize = Sequelize // export the sequelize
 db.sequelize = sequelize // export the connection
 
-db.model = require('./user.model')(sequelize, Sequelize)  // user model
+db.model = require('./user.model')(sequelize, Sequelize) // user model
 db.train_model = require('./train.model')(sequelize, Sequelize) // train model
 db.station_model = require('./station.model')(sequelize, Sequelize) // station model
 

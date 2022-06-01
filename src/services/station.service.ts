@@ -1,5 +1,6 @@
-const station =require('../model/conn') // connection to database
-import {station_data} from '../types/station.types' // station data type
+// connection to database
+import {station_data} from '../types/station.types' ;
+const station =require('../model/conn') // station data type
 export async function getdata () {
   return new Promise(async (resolve, reject) => {
     try {
@@ -12,10 +13,9 @@ export async function getdata () {
   })
 }
 export async function addstation (newstation : station_data) {
-
   return new Promise(async (resolve, reject) => {
     try {
-      const data = await station.station_model.create(newstation) //put data in () tpes
+      const data = await station.station_model.create(newstation) // put data in () tpes
       resolve(data)
     } catch (e) {
       reject(e)
@@ -23,9 +23,9 @@ export async function addstation (newstation : station_data) {
   })
 }
 export async function updatestation (station_name:string, updated_station:Request | any) {
-  let query_build:any = {}; 
-    for(let i in updated_station)
-        query_build[i] = updated_station[i];
+  const query_build:any = {}; 
+  for (const i in updated_station)
+    query_build[i] = updated_station[i]
   return new Promise(async (resolve, reject) => {
     try {
       const data = await station.station_model.update(query_build, {
@@ -53,4 +53,3 @@ export async function deletestation (station_name:string) {
     }
   })
 }
-
