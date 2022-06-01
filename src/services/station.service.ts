@@ -12,9 +12,10 @@ export async function getdata () {
   })
 }
 export async function addstation (newstation : station_data) {
+
   return new Promise(async (resolve, reject) => {
     try {
-      const data = await station.station_model.create() //put data in () tpes
+      const data = await station.station_model.create(newstation) //put data in () tpes
       resolve(data)
     } catch (e) {
       reject(e)

@@ -15,6 +15,7 @@ export async function addtrain (req: Request, res: Response) {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
+  
   const new_train: train_data = req.body
   await train_service.addtrain(new_train).then((result: any) => {
     res.send('train added')
