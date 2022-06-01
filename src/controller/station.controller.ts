@@ -14,7 +14,7 @@ export async function addstation (req: Request, res: Response) {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
-  await station_services.addstation(req.body).then((result: any) => {
+  await station_services.addstation(req).then((result: any) => {
     res.send('station added')
   }).catch((err: any) => {
     res.send(err)

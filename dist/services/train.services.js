@@ -86,3 +86,41 @@ function updatetrain(train_name, updated_train) {
     });
 }
 exports.updatetrain = updatetrain;
+/**
+ * /**
+ * , [ // add train
+  check('train_name').not().isEmpty(),
+  check('train_number').not().isEmpty(),
+  check('train_name').custom((value: any) => {
+    return train_common.findtrainname(value).then((result: any) => {
+      if (result.length > 0) {
+        throw new Error('train name already exists')
+      }
+      return true
+    })
+  })
+]
+ * ========================================================================
+ * [ // delete train
+  check('train_name').custom((value: string, { req }: any) => {
+    return train_common.findtrainname(value).then((result: any) => {
+      if (result.length === 0) {
+        throw new Error('train name not found')
+      }
+      return true
+    })
+  })
+],
+ */
+/**
+ *  [ // update train
+  check('train_name').custom((value: string, { req }: any) => {
+    return train_common.findtrainname(value).then((result: any) => {
+      if (result.length <= 0) {
+        throw new Error('train name does not exists')
+      }
+      return true
+    })
+  })
+],
+ */ 

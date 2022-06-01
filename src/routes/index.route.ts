@@ -12,3 +12,5 @@ route.use('/user', user_route) // use user routes
 route.use('/train', train_route) // use train routes
 route.use('/station', station_route) // use station routes
 module.exports = route // export router for use in app.ts
+
+

@@ -31,40 +31,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express")); // express is the framework
 const train_controller = __importStar(require("../controller/train.controller")); // train controller is defined in train.controller.ts
-const train_common = __importStar(require("../common/train.common.function")); // common functions are defined in common.function.ts
-const { check } = require('express-validator'); // express validator is used for validation
+const train_validation = __importStar(require("../rules/train.rules")); // train rules is defined in train.rules.ts
 const train_route = express_1.default.Router(); // create express router
 train_route.get('/gettrain', train_controller.gettrain); // get train
-train_route.post('/addtrain', [
-    check('train_name').not().isEmpty(),
-    check('train_number').not().isEmpty(),
-    check('train_name').custom((value) => {
-        return train_common.findtrainname(value).then((result) => {
-            if (result.length > 0) {
-                throw new Error('train name already exists');
-            }
-            return true;
-        });
-    })
-], train_controller.addtrain);
-train_route.delete('/deletetrain/:train_name', [
-    check('train_name').custom((value, { req }) => {
-        return train_common.findtrainname(value).then((result) => {
-            if (result.length === 0) {
-                throw new Error('train name not found');
-            }
-            return true;
-        });
-    })
-], train_controller.deletetrain);
-train_route.put('/updatetrain/:train_name', [
-    check('train_name').custom((value, { req }) => {
-        return train_common.findtrainname(value).then((result) => {
-            if (result.length <= 0) {
-                throw new Error('train name does not exists');
-            }
-            return true;
-        });
-    })
-], train_controller.updatetrain);
+train_route.post('/addtrain', train_validation.train_validation_add_train, train_controller.addtrain);
+train_route.delete('/deletetrain/:train_name', train_validation.train_validation_update_delete_train, train_controller.deletetrain);
+train_route.put('/updatetrain/:train_name', train_validation.train_validation_update_delete_train, train_controller.updatetrain);
 module.exports = train_route; // export router for use in app.ts
