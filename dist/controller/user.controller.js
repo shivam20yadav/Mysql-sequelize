@@ -51,16 +51,7 @@ function adduser(req, res) {
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-        console.log(req.body.phonenumber);
-        const new_user = {
-            username: req.body.username,
-            userpassword: req.body.password,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            phonenumber: req.body.phonenumber
-        };
-        console.log(new_user);
+        const new_user = req.body;
         yield user_service.adduser(new_user).then((result) => {
             res.send('user added');
         }).catch((err) => {

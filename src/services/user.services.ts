@@ -1,11 +1,12 @@
 /**
  * In this file we perform user add update delete and get opration
  */
- const user_data = require('./conn')
- export async function getdata () { // get all user data
+ const user_data_ = require('../model/conn') // connection to database
+import {user_data} from '../types/user.types' // user data type
+ export async function getuser () { // get all user data
    return new Promise(async (resolve, reject) => {
      try {
-       const data = await user_data.model.findAll()
+       const data = await user_data_.model.findAll()
        data.map((user: { dataValues: any; }) => user.dataValues)
        resolve(data)
      } catch (e) {
@@ -13,10 +14,10 @@
      }
    })
  }
- export async function adduser (new_user: {}) { // add new user
+ export async function adduser (new_user:user_data) { // add new user
    return new Promise(async (resolve, reject) => {
      try {
-       const data = await user_data.model.create(new_user)
+       const data = await user_data_.model.create(new_user)
        resolve(data)
      } catch (e) {
        reject(e)
@@ -26,7 +27,7 @@
  export async function delete_user (username: string) { // delete user by username
    return new Promise(async (resolve, reject) => {
      try {
-       const data = await user_data.model.destroy({
+       const data = await user_data_.model.destroy({
          where: {
            username
          }
@@ -38,13 +39,19 @@
    })
  }
  export async function update_user (user_name:string, updated_user:Request | any) { // update user by username 
+  let query_build:any = {}; 
+    for(let i in updated_user)
+        query_build[i] = updated_user[i];
+
+  console.log(query_build);
    return new Promise(async (resolve, reject) => {
      try {
-       const data = await user_data.model.update(updated_user, {
+       const data = await user_data_.model.update(query_build, {
          where: {
            username: user_name
          }
        })
+       console.log(data);
        resolve(data)
      } catch (e) {
        reject(e)

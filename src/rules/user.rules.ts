@@ -7,7 +7,7 @@ import * as user_common from '../common/user.common.function'; // train common f
 export const user_validation_add_user = [
     // add user
  check('username').isLength({ min: 2 }).withMessage('username is required'), // username is required
-  check('password').isLength({ min: 7 }).withMessage('password is required'), // password is required
+  check('userpassword').isLength({ min: 7 }).withMessage('password is required'), // password is required
   check('firstname').isLength({ min: 2 }).withMessage('firstname is required'), // firstname is required
   check('lastname').isLength({ min: 2 }).withMessage('lastname is required'), // lastname is required
   check('email').isEmail().withMessage('email is required'), // email is required

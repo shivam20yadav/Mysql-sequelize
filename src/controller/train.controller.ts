@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import * as train_service from '../services/train.services'
+import { train_data } from '../types/train.types'
 
 export async function gettrain (req: Request, res: Response) {
   await train_service.gettrain().then((result: any) => {
@@ -14,7 +15,8 @@ export async function addtrain (req: Request, res: Response) {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
-  await train_service.addtrain(req.body).then((result: any) => {
+  const new_train: train_data = req.body
+  await train_service.addtrain(new_train).then((result: any) => {
     res.send('train added')
   }).catch((err: any) => {
     res.send(err)

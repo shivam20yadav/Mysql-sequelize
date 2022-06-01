@@ -1,5 +1,5 @@
-const station = require('./conn') // connection to database
-
+const station =require('../model/conn') // connection to database
+import {station_data} from '../types/station.types' // station data type
 export async function getdata () {
   return new Promise(async (resolve, reject) => {
     try {
@@ -11,7 +11,7 @@ export async function getdata () {
     }
   })
 }
-export async function addstation () {
+export async function addstation (newstation : station_data) {
   return new Promise(async (resolve, reject) => {
     try {
       const data = await station.station_model.create() //put data in () tpes
@@ -22,9 +22,12 @@ export async function addstation () {
   })
 }
 export async function updatestation (station_name:string, updated_station:Request | any) {
+  let query_build:any = {}; 
+    for(let i in updated_station)
+        query_build[i] = updated_station[i];
   return new Promise(async (resolve, reject) => {
     try {
-      const data = await station.station_model.update(updated_station, {
+      const data = await station.station_model.update(query_build, {
         where: {
           station_name
         }

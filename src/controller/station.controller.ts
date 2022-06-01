@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import * as station_services from '../services/station.service'
+import { station_data } from '../types/station.types'
 
 export async function getstation (req: Request, res: Response) {
   await station_services.getdata().then((result: any) => {
@@ -14,7 +15,8 @@ export async function addstation (req: Request, res: Response) {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
-  await station_services.addstation(req).then((result: any) => {
+  const new_station: station_data = req.body
+  await station_services.addstation(new_station).then((result: any) => {
     res.send('station added')
   }).catch((err: any) => {
     res.send(err)

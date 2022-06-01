@@ -51,7 +51,8 @@ function addtrain(req, res) {
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-        yield train_service.addtrain(req.body).then((result) => {
+        const new_train = req.body;
+        yield train_service.addtrain(new_train).then((result) => {
             res.send('train added');
         }).catch((err) => {
             res.send(err);

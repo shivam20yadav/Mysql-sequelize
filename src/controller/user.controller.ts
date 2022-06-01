@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import * as user_service from '../services/user.services'
+import {user_data} from '../types/user.types'
 
 export async function getuser (req: Request, res: Response) {
   await user_service.getuser().then((result) => {
@@ -14,16 +15,7 @@ export async function adduser (req: Request, res: Response) {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
-  console.log(req.body.phonenumber)
-  const new_user = {
-    username: req.body.username,
-    userpassword: req.body.password,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    phonenumber: req.body.phonenumber
-  }
-  console.log(new_user)
+  const new_user: user_data = req.body
   await user_service.adduser(new_user).then((result) => {
     res.send('user added')
   }).catch((err) => {

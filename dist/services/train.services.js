@@ -1,27 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -32,95 +9,74 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updatetrain = exports.deletetrain = exports.addtrain = exports.gettrain = void 0;
-const train_model = __importStar(require("../model/train.model"));
+exports.deletetrain = exports.updatetrain = exports.addtrain = exports.gettrain = void 0;
+const train_model = require('../model/conn'); // connection to database
 function gettrain() {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve, reject) => {
-            train_model.getdata().then((result) => {
-                resolve(result);
-            }).catch((err) => {
-                reject(err);
-            });
-        });
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield train_model.train_model.findAll();
+                data.map((train_data) => train_data.dataValues);
+                resolve(data);
+            }
+            catch (e) {
+                reject(e);
+            }
+        }));
     });
 }
 exports.gettrain = gettrain;
 function addtrain(new_train) {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve, reject) => {
-            train_model.addtrain(new_train).then((result) => {
-                resolve(result);
-            }).catch((err) => {
-                reject(err);
-            });
-        });
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield train_model.train_model.create(new_train);
+                resolve(data);
+            }
+            catch (e) {
+                reject(e);
+            }
+        }));
     });
 }
 exports.addtrain = addtrain;
-function deletetrain(train_name) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve, reject) => {
-            train_model.deletetrain(train_name).then((result) => {
-                resolve(result);
-            }).catch((err) => {
-                reject(err);
-            });
-        });
-    });
-}
-exports.deletetrain = deletetrain;
 function updatetrain(train_name, updated_train) {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve, reject) => {
-            const query_build = {};
-            for (const i in updated_train) {
-                query_build[i] = updated_train[i];
+        let query_build = {};
+        for (let i in updated_train)
+            query_build[i] = updated_train[i];
+        console.log(query_build);
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield train_model.train_model.update(query_build, {
+                    where: {
+                        train_name
+                    }
+                });
+                resolve(data);
             }
-            train_model.updatetrain(train_name, query_build).then((result) => {
-                resolve(result);
-            }).catch((err) => {
-                reject(err);
-            });
-        });
+            catch (e) {
+                reject(e);
+            }
+        }));
     });
 }
 exports.updatetrain = updatetrain;
-/**
- * /**
- * , [ // add train
-  check('train_name').not().isEmpty(),
-  check('train_number').not().isEmpty(),
-  check('train_name').custom((value: any) => {
-    return train_common.findtrainname(value).then((result: any) => {
-      if (result.length > 0) {
-        throw new Error('train name already exists')
-      }
-      return true
-    })
-  })
-]
- * ========================================================================
- * [ // delete train
-  check('train_name').custom((value: string, { req }: any) => {
-    return train_common.findtrainname(value).then((result: any) => {
-      if (result.length === 0) {
-        throw new Error('train name not found')
-      }
-      return true
-    })
-  })
-],
- */
-/**
- *  [ // update train
-  check('train_name').custom((value: string, { req }: any) => {
-    return train_common.findtrainname(value).then((result: any) => {
-      if (result.length <= 0) {
-        throw new Error('train name does not exists')
-      }
-      return true
-    })
-  })
-],
- */ 
+function deletetrain(train_name) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield train_model.train_model.destroy({
+                    where: {
+                        train_name
+                    }
+                });
+                resolve(data);
+            }
+            catch (e) {
+                reject(e);
+            }
+        }));
+    });
+}
+exports.deletetrain = deletetrain;
