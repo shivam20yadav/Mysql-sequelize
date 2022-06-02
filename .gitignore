@@ -3,8 +3,7 @@ node_modules
 
 # .env files 
 src/config/.env
-# dist file 
-dist
+
 #
 private.pem
 public.pem
