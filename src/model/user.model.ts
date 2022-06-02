@@ -19,7 +19,7 @@ module.exports = (sequelize:any, Sequelize:any) => {
     email: {
       type: Sequelize.STRING,
       validate: {
-        isEmail: true
+        // isEmail: true
       }
     },
     phonenumber: {
