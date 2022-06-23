@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deletetrain = exports.updatetrain = exports.addtrain = exports.gettrain = void 0;
+exports.train_service = void 0;
 const train_model = require('../model/conn'); // train data type
-function gettrain() {
-    return __awaiter(this, void 0, void 0, function* () {
+class train_service {
+    static gettrain() {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield train_model.train_model.findAll();
@@ -23,11 +23,8 @@ function gettrain() {
                 reject(e);
             }
         }));
-    });
-}
-exports.gettrain = gettrain;
-function addtrain(new_train) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static addtrain(new_train) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield train_model.train_model.create(new_train);
@@ -37,11 +34,8 @@ function addtrain(new_train) {
                 reject(e);
             }
         }));
-    });
-}
-exports.addtrain = addtrain;
-function updatetrain(train_name, updated_train) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static updatetrain(train_name, updated_train) {
         const query_build = {};
         for (const i in updated_train)
             query_build[i] = updated_train[i];
@@ -59,11 +53,8 @@ function updatetrain(train_name, updated_train) {
                 reject(e);
             }
         }));
-    });
-}
-exports.updatetrain = updatetrain;
-function deletetrain(train_name) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static deletetrain(train_name) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield train_model.train_model.destroy({
@@ -77,6 +68,6 @@ function deletetrain(train_name) {
                 reject(e);
             }
         }));
-    });
+    }
 }
-exports.deletetrain = deletetrain;
+exports.train_service = train_service;

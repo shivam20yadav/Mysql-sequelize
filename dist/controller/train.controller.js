@@ -32,59 +32,58 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updatetrain = exports.deletetrain = exports.addtrain = exports.gettrain = void 0;
+exports.train_controller = void 0;
 const express_validator_1 = require("express-validator");
 const train_service = __importStar(require("../services/train.services"));
-function gettrain(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield train_service.gettrain().then((result) => {
-            res.send(result);
-        }).catch((err) => {
-            res.status(500).send(err);
+class train_controller {
+    static gettrain(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield train_service.train_service.gettrain().then((result) => {
+                res.send(result);
+            }).catch((err) => {
+                res.status(500).send(err);
+            });
         });
-    });
-}
-exports.gettrain = gettrain;
-function addtrain(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const errors = (0, express_validator_1.validationResult)(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
-        const new_train = req.body;
-        yield train_service.addtrain(new_train).then((result) => {
-            res.send('train added');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static addtrain(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const errors = (0, express_validator_1.validationResult)(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({ errors: errors.array() });
+            }
+            const new_train = req.body;
+            yield train_service.train_service.addtrain(new_train).then((result) => {
+                res.send('train added');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
-}
-exports.addtrain = addtrain;
-function deletetrain(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const error = (0, express_validator_1.validationResult)(req);
-        if (!error.isEmpty()) {
-            return res.status(422).json({ errors: error.array() });
-        }
-        yield train_service.deletetrain(req.params.train_name).then((result) => {
-            res.send('train deleted');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static deletetrain(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const error = (0, express_validator_1.validationResult)(req);
+            if (!error.isEmpty()) {
+                return res.status(422).json({ errors: error.array() });
+            }
+            yield train_service.train_service.deletetrain(req.params.train_name).then((result) => {
+                res.send('train deleted');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
-}
-exports.deletetrain = deletetrain;
-function updatetrain(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const error = (0, express_validator_1.validationResult)(req);
-        if (!error.isEmpty()) {
-            return res.status(422).json({ errors: error.array() });
-        }
-        yield train_service.updatetrain(req.params.train_name, req.body).then((result) => {
-            res.send('train updated');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static updatetrain(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const error = (0, express_validator_1.validationResult)(req);
+            if (!error.isEmpty()) {
+                return res.status(422).json({ errors: error.array() });
+            }
+            yield train_service.train_service.updatetrain(req.params.train_name, req.body).then((result) => {
+                res.send('train updated');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
+    }
 }
-exports.updatetrain = updatetrain;
+exports.train_controller = train_controller;

@@ -32,57 +32,56 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateuser = exports.deleteuser = exports.adduser = exports.getuser = void 0;
+exports.user_controller = void 0;
 const express_validator_1 = require("express-validator");
-const user_service = __importStar(require("../services/user.services"));
-function getuser(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield user_service.getuser().then((result) => {
-            res.send(result);
-        }).catch((err) => {
-            res.status(500).send(err);
+const user_services = __importStar(require("../services/user.services"));
+class user_controller {
+    static getuser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield user_services.user_service.getuser().then((result) => {
+                res.send(result);
+            }).catch((err) => {
+                res.status(500).send(err);
+            });
         });
-    });
-}
-exports.getuser = getuser;
-function adduser(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const errors = (0, express_validator_1.validationResult)(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
-        const new_user = req.body;
-        yield user_service.adduser(new_user).then((result) => {
-            res.send('user added');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static adduser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const errors = (0, express_validator_1.validationResult)(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({ errors: errors.array() });
+            }
+            const new_user = req.body;
+            yield user_services.user_service.adduser(new_user).then((result) => {
+                res.send('user added');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
-}
-exports.adduser = adduser;
-function deleteuser(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const username = req.params.username;
-        yield user_service.delete_user(username).then((result) => {
-            res.send('user deleted');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static deleteuser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const username = req.params.username;
+            yield user_services.user_service.delete_user(username).then((result) => {
+                res.send('user deleted');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
-}
-exports.deleteuser = deleteuser;
-function updateuser(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const err = (0, express_validator_1.validationResult)(req);
-        if (!err.isEmpty()) {
-            return res.status(422).json({ errors: err.array() });
-        }
-        const username = req.params.username;
-        yield user_service.update_user(username, req.body).then((result) => {
-            res.send('user updated');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static updateuser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const err = (0, express_validator_1.validationResult)(req);
+            if (!err.isEmpty()) {
+                return res.status(422).json({ errors: err.array() });
+            }
+            const username = req.params.username;
+            yield user_services.user_service.update_user(username, req.body).then((result) => {
+                res.send('user updated');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
+    }
 }
-exports.updateuser = updateuser;
+exports.user_controller = user_controller;

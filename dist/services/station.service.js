@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deletestation = exports.updatestation = exports.addstation = exports.getdata = void 0;
+exports.station_service = void 0;
 const station = require('../model/conn'); // station data type
-function getdata() {
-    return __awaiter(this, void 0, void 0, function* () {
+class station_service {
+    static getdata() {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield station.station_model.findAll();
@@ -23,11 +23,8 @@ function getdata() {
                 reject(e);
             }
         }));
-    });
-}
-exports.getdata = getdata;
-function addstation(newstation) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static addstation(newstation) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield station.station_model.create(newstation); // put data in () tpes
@@ -37,11 +34,8 @@ function addstation(newstation) {
                 reject(e);
             }
         }));
-    });
-}
-exports.addstation = addstation;
-function updatestation(station_name, updated_station) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static updatestation(station_name, updated_station) {
         const query_build = {};
         for (const i in updated_station)
             query_build[i] = updated_station[i];
@@ -58,11 +52,8 @@ function updatestation(station_name, updated_station) {
                 reject(e);
             }
         }));
-    });
-}
-exports.updatestation = updatestation;
-function deletestation(station_name) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static deletestation(station_name) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield station.station_model.destroy({
@@ -76,6 +67,6 @@ function deletestation(station_name) {
                 reject(e);
             }
         }));
-    });
+    }
 }
-exports.deletestation = deletestation;
+exports.station_service = station_service;

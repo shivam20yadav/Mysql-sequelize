@@ -1,65 +1,63 @@
-
-var chai = require('chai'), chaiHttp = require('chai-http');
-
-import { expect } from 'chai';
-
+var chai1 = require('chai'), chaiHttp = require('chai-http');
 var app = require('../app');
+import * as user_service from '../services/user.services'
+chai1.use(chaiHttp);
+chai1.request(app).get('/')
 
-chai.use(chaiHttp);
-
-chai.request(app).get('/')
-
-describe("User Service Unit Tests", function () {
-    describe("Save User functionality", function () {
-        it("should successfully add a user", function (done) {
-            chai.request(app).post('/user/adduser').send({
-                "username":"sada",
-                "userpassword":"sdfsdffsdf",
-                "firstname":"sdfssdf",
-                "lastname":"fadnff",
-                "email":"yadav@gmail.com",
-                "phonenumber":"7986541230"}).then(function (res: { body: { success: any; }; }) {
-                expect(res).to.have.status(200);
+describe("user service unit test",() =>
+{
+    it("should return all user details",(done) =>{
+        chai1.request(app).get('/user/getuser').end((err:any,res:Response) =>{
+            chai1.expect(res.status).to.equal(200);
+            done();
+        })
+    })
+    it("should add user into the database",(done) =>{
+        chai1.request(app).post('/user/adduser').send({username:"test",userpassword:"tesst",firstname:"test",lastname:"test",email:"somethin@gmail.com",phonenumber:9400065497}).end((err:any,res:Response) =>{
+            if(res.status == 200)
+            {
+                chai1.expect(res.status).to.equal(200);
                 done();
-            }).catch(function (err: any) {
-                done(err);
-            });
-        });
-    });
-    describe("Show User functionality", function () {
-        it("should successfully show all users", function (done) {
-            chai.request(app).get('/user/getuser').end(function (err: any, res: any) {
-                expect(res.status).to.equal(200);
+            }   
+            if(res.status == 422)
+            {
+                chai1.expect(res.status).to.equal(422,`validation error not error ${res.body}`);
                 done();
             }
-            );
-        });
-    });
+        })
+    })
+    it("should delete user from the database",(done) =>{
+        chai1.request(app).delete('/user/deleteuser/test').end((err:any,res:Response) =>{
+            chai1.expect(res.status).to.equal(200);
+            done();
+        })
+    })
+    it("should update user from the database",(done) =>{
+        chai1.request(app).put('/user/updateuser/sadas').send({username:"sadas",userpassword:"teadasst",firstname:"test",lastname:"test",email:"sg@gmail.com"}).end((err:any,res:Response) =>{
+            chai1.expect(res.status).to.equal(200);
+            done();
+        })
+    })
 });
-
-// describe("User Service Unit Tests", function () {
-//     describe("Save and show User functionality", function () {
-//       it("should successfully add a user", async function () {
-//         const new_user: user_data = {
-//             username: 'test_cass',
-//             userpassword: 'test_cses',
-//             firstname: 'test_cases',
-//             lastname: 'test_cases',
-//             email: 'test_cases@gmailw.com ',
-//             phonenumber: '12345608977'
-//         }
-//         await user_service.adduser(new_user).then((result) => {
-//             expect(result).to.equal('user added');
-//         }).catch((err) => {
-//             expect(err.message).to.equal(err.message);
-//         });
-//       });
-//       it("it shoud return all user data", async function () {
-//         await user_service.getuser().then((result: any) => {
-//             expect(result).to.equal('all user data returned');
-//         }).catch((err: { message: any; }) => {
-//             expect(err.message).to.equal("something went wrong");
-//         });
-//       });
-//     });
-//   });
+describe("user service integration test",() =>{
+    it("should return all user details",async function (){
+        await user_service.user_service.getuser().then((result:any) =>{
+            chai1.expect(result).to.equal(result);
+        })
+    })
+    it("should add user into the database",async function (){
+        await user_service.user_service.adduser({username:"test",userpassword:"tead",firstname:"test",lastname:"test",email:"asasda@gmail.com",phonenumber:"9400005497"}).then((result:any) =>{
+            chai1.expect(result).to.equal("user added");
+        })
+    })
+    it("should delete user from the database",async function (){
+        user_service.user_service.delete_user('test').then((result:any) =>{
+            chai1.expect(result).to.equal('user deleted');
+        })
+    })
+    it("should update user from the database",async function (){
+        user_service.user_service.update_user('sadas',{username:"sadas",userpassword:"teadasst",firstname:"test",lastname:"test",email:"asda@gmail.com"}).then((result:any) =>{
+            chai1.expect(result).to.equal('user updated');
+        }) 
+    })
+})

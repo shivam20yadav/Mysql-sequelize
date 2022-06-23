@@ -32,59 +32,58 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deletestation = exports.updatestation = exports.addstation = exports.getstation = void 0;
+exports.station_model = void 0;
 const express_validator_1 = require("express-validator");
 const station_services = __importStar(require("../services/station.service"));
-function getstation(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield station_services.getdata().then((result) => {
-            res.send(result);
-        }).catch((err) => {
-            res.status(500).send(err);
+class station_model {
+    static getstation(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield station_services.station_service.getdata().then((result) => {
+                res.send(result);
+            }).catch((err) => {
+                res.status(500).send(err);
+            });
         });
-    });
-}
-exports.getstation = getstation;
-function addstation(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const errors = (0, express_validator_1.validationResult)(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
-        const new_station = req.body;
-        yield station_services.addstation(new_station).then((result) => {
-            res.send('station added');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static addstation(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const errors = (0, express_validator_1.validationResult)(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({ errors: errors.array() });
+            }
+            const new_station = req.body;
+            yield station_services.station_service.addstation(new_station).then((result) => {
+                res.send('station added');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
-}
-exports.addstation = addstation;
-function updatestation(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const errors = (0, express_validator_1.validationResult)(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
-        yield station_services.updatestation(req.params.station_name, req.body).then((result) => {
-            res.send('station updated');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static updatestation(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const errors = (0, express_validator_1.validationResult)(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({ errors: errors.array() });
+            }
+            yield station_services.station_service.updatestation(req.params.station_name, req.body).then((result) => {
+                res.send('station updated');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
-}
-exports.updatestation = updatestation;
-function deletestation(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const error = (0, express_validator_1.validationResult)(req);
-        if (!error.isEmpty()) {
-            return res.status(422).json({ errors: error.array() });
-        }
-        yield station_services.deletestation(req.params.station_name).then((result) => {
-            res.send('station deleted');
-        }).catch((err) => {
-            res.send(err);
+    }
+    static deletestation(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const error = (0, express_validator_1.validationResult)(req);
+            if (!error.isEmpty()) {
+                return res.status(422).json({ errors: error.array() });
+            }
+            yield station_services.station_service.deletestation(req.params.station_name).then((result) => {
+                res.send('station deleted');
+            }).catch((err) => {
+                res.send(err);
+            });
         });
-    });
+    }
 }
-exports.deletestation = deletestation;
+exports.station_model = station_model;

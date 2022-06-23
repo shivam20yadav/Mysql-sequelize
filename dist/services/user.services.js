@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.update_user = exports.delete_user = exports.adduser = exports.getuser = void 0;
+exports.user_service = void 0;
 const user_data_ = require('../model/conn'); // user data type
-function getuser() {
-    return __awaiter(this, void 0, void 0, function* () {
+class user_service {
+    static getuser() {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield user_data_.model.findAll();
@@ -23,25 +23,19 @@ function getuser() {
                 reject(e);
             }
         }));
-    });
-}
-exports.getuser = getuser;
-function adduser(new_user) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static adduser(new_user) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield user_data_.model.create(new_user);
-                resolve(data);
+                resolve("user added");
             }
             catch (e) {
                 reject(e);
             }
         }));
-    });
-}
-exports.adduser = adduser;
-function delete_user(username) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static delete_user(username) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield user_data_.model.destroy({
@@ -49,17 +43,14 @@ function delete_user(username) {
                         username
                     }
                 });
-                resolve(data);
+                resolve("user deleted");
             }
             catch (e) {
                 reject(e);
             }
         }));
-    });
-}
-exports.delete_user = delete_user;
-function update_user(user_name, updated_user) {
-    return __awaiter(this, void 0, void 0, function* () {
+    }
+    static update_user(user_name, updated_user) {
         const query_build = {};
         for (const i in updated_user)
             query_build[i] = updated_user[i];
@@ -71,13 +62,12 @@ function update_user(user_name, updated_user) {
                         username: user_name
                     }
                 });
-                console.log(data);
-                resolve(data);
+                resolve("user updated");
             }
             catch (e) {
                 reject(e);
             }
         }));
-    });
+    }
 }
-exports.update_user = update_user;
+exports.user_service = user_service;

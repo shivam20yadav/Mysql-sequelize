@@ -1,7 +1,5 @@
-import * as station_services from '../services/station.service'
-import { Request, Response } from 'express'
-
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // export async function get_data_by_train (req: Request, res: Response) {
 //   await station_services.getdata().then((result: any) => {
 //     res.send(result)

@@ -8,3 +8,5 @@ src/config/.env
 private.pem
 public.pem
 package-lock.json
+./node_modules/
+./dist/

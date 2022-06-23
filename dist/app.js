@@ -9,8 +9,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express")); // express is the framework
 const body_parser_1 = __importDefault(require("body-parser")); // body-parser is a middleware for express
-const dotenv_1 = __importDefault(require("dotenv")); // routes are defined in index.route.ts
-const route = require('./routes/index.route'); // jwt utils is used for generating tokens';
+const dotenv_1 = __importDefault(require("dotenv"));
+const route = require('./routes/index.route'); // routes are defined in index.route.ts 
 const sequelize = require('./model/conn'); // sequelize is the connection to the database
 dotenv_1.default.config({ path: 'src/config/.env' }); // load environment variables from .env file
 const app = (0, express_1.default)(); // create express app
