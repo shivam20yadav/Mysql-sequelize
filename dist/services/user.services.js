@@ -54,7 +54,6 @@ class user_service {
         const query_build = {};
         for (const i in updated_user)
             query_build[i] = updated_user[i];
-        console.log(query_build);
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield user_data_.model.update(query_build, {

@@ -5,6 +5,11 @@
  */
 module.exports = (sequelize, Sequelize) => {
     const station = sequelize.define('station', {
+        station_id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         station_name: {
             type: Sequelize.STRING
         },

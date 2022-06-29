@@ -23,4 +23,7 @@ db.sequelize = sequelize; // export the connection
 db.model = require('./user.model')(sequelize, Sequelize); // user model
 db.train_model = require('./train.model')(sequelize, Sequelize); // train model
 db.station_model = require('./station.model')(sequelize, Sequelize); // station model
+db.train_station_model = require('./train_station.model')(sequelize, Sequelize); // train station model
+db.booking = require('./booking.model')(sequelize, Sequelize); // booking model
+db.booking_user = require('./booking_user.model')(sequelize, Sequelize); // booking user model
 module.exports = db; // export the connection
