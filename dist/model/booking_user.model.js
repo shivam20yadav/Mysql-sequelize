@@ -1,17 +1,17 @@
 "use strict";
+const booking_master = require("./booking.model");
 module.exports = (sequelize, Sequelize) => {
     const booking_user = sequelize.define('booking_user', {
-        booking_id: {
-            type: Sequelize.INTEGER,
-            references: {
-                model: 'booking_masters',
-                key: 'booking_id'
-            }
-        },
         person_name: {
             type: Sequelize.STRING,
             allownull: false
         }
+    });
+    sequelize.models.booking_master.hasOne(booking_user, {
+        foreginKey: 'booking_id'
+    });
+    booking_user.belongsTo(sequelize.models.booking_master, {
+        foreginKey: 'booking_id'
     });
     return booking_user;
 };
